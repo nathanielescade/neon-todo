@@ -22,6 +22,35 @@ export default function TodoItem({ todo }: TodoItemProps) {
     dueDate: todo.dueDate || '',
   })
   
+  // Custom input styles
+  const inputStyles = {
+    backgroundColor: 'rgba(30, 41, 59, 0.7)',
+    borderColor: currentTheme.primary,
+    color: 'white',
+    // Using CSS custom property for focus ring color
+    '--tw-ring-color': currentTheme.primary,
+  } as React.CSSProperties // Type assertion to allow custom CSS properties
+  
+  // Custom select styles
+  const selectStyles = {
+    backgroundColor: 'rgba(30, 41, 59, 0.7)',
+    borderColor: currentTheme.primary,
+    color: 'white',
+    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23${currentTheme.primary.replace('#', '')}' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 1rem center',
+    backgroundSize: '12px',
+    paddingRight: '2.5rem',
+    // Using CSS custom property for focus ring color
+    '--tw-ring-color': currentTheme.primary,
+  } as React.CSSProperties
+  
+  const optionStyle = {
+    backgroundColor: 'rgba(30, 41, 59, 0.9)',
+    color: 'white',
+    padding: '0.5rem 1rem'
+  }
+  
   const handleSave = () => {
     updateTodo(todo.id, editData)
     setIsEditing(false)
@@ -78,8 +107,8 @@ export default function TodoItem({ todo }: TodoItemProps) {
               type="text"
               value={editData.title}
               onChange={(e) => setEditData({...editData, title: e.target.value})}
-              className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-              style={{ focusRingColor: currentTheme.primary }}
+              className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 text-white"
+              style={inputStyles}
             />
           </div>
           
@@ -87,8 +116,8 @@ export default function TodoItem({ todo }: TodoItemProps) {
             <textarea
               value={editData.description}
               onChange={(e) => setEditData({...editData, description: e.target.value})}
-              className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-              style={{ focusRingColor: currentTheme.primary }}
+              className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 text-white"
+              style={inputStyles}
               rows={3}
             />
           </div>
@@ -99,13 +128,13 @@ export default function TodoItem({ todo }: TodoItemProps) {
               <select
                 value={editData.priority}
                 onChange={(e) => setEditData({...editData, priority: e.target.value as Todo['priority']})}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-                style={{ focusRingColor: currentTheme.primary }}
+                className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 appearance-none"
+                style={selectStyles}
               >
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-                <option value="urgent">Urgent</option>
+                <option value="low" style={optionStyle}>Low</option>
+                <option value="medium" style={optionStyle}>Medium</option>
+                <option value="high" style={optionStyle}>High</option>
+                <option value="urgent" style={optionStyle}>Urgent</option>
               </select>
             </div>
             
@@ -114,14 +143,14 @@ export default function TodoItem({ todo }: TodoItemProps) {
               <select
                 value={editData.category}
                 onChange={(e) => setEditData({...editData, category: e.target.value})}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-                style={{ focusRingColor: currentTheme.primary }}
+                className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 appearance-none"
+                style={selectStyles}
               >
-                <option value="Personal">Personal</option>
-                <option value="Work">Work</option>
-                <option value="Health">Health</option>
-                <option value="Learning">Learning</option>
-                <option value="Finance">Finance</option>
+                <option value="Personal" style={optionStyle}>Personal</option>
+                <option value="Work" style={optionStyle}>Work</option>
+                <option value="Health" style={optionStyle}>Health</option>
+                <option value="Learning" style={optionStyle}>Learning</option>
+                <option value="Finance" style={optionStyle}>Finance</option>
               </select>
             </div>
             
@@ -131,8 +160,8 @@ export default function TodoItem({ todo }: TodoItemProps) {
                 type="date"
                 value={editData.dueDate}
                 onChange={(e) => setEditData({...editData, dueDate: e.target.value})}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-                style={{ focusRingColor: currentTheme.primary }}
+                className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 appearance-none"
+                style={inputStyles}
               />
             </div>
           </div>
@@ -177,7 +206,7 @@ export default function TodoItem({ todo }: TodoItemProps) {
           </div>
         </div>
       ) : (
-        <div className="flex items-start">
+        <div className="flex items-start group"> {/* Added group class for hover effects */}
           <button
             onClick={() => toggleComplete(todo.id)}
             className={`flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center mt-1 mr-4 ${

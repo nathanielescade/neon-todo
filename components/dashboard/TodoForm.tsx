@@ -25,6 +25,35 @@ export default function TodoForm({ categories, tags, setShowForm }: TodoFormProp
   const [newTag, setNewTag] = useState('')
   const [showNewCategory, setShowNewCategory] = useState(false)
   const [showNewTag, setShowNewTag] = useState(false)
+  
+  // Custom input styles
+  const inputStyles = {
+    backgroundColor: 'rgba(30, 41, 59, 0.7)',
+    borderColor: currentTheme.primary,
+    color: 'white',
+    // Using CSS custom property for focus ring color
+    '--tw-ring-color': currentTheme.primary,
+  } as React.CSSProperties // Type assertion to allow custom CSS properties
+  
+  // Custom select styles
+  const selectStyles = {
+    backgroundColor: 'rgba(30, 41, 59, 0.7)',
+    borderColor: currentTheme.primary,
+    color: 'white',
+    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23${currentTheme.primary.replace('#', '')}' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 1rem center',
+    backgroundSize: '12px',
+    paddingRight: '2.5rem',
+    // Using CSS custom property for focus ring color
+    '--tw-ring-color': currentTheme.primary,
+  } as React.CSSProperties
+  
+  const optionStyle = {
+    backgroundColor: 'rgba(30, 41, 59, 0.9)',
+    color: 'white',
+    padding: '0.5rem 1rem'
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -88,8 +117,8 @@ export default function TodoForm({ categories, tags, setShowForm }: TodoFormProp
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-            style={{ focusRingColor: currentTheme.primary }}
+            className="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 text-white placeholder-white/50"
+            style={inputStyles}
             placeholder="What needs to be done?"
             required
           />
@@ -100,8 +129,8 @@ export default function TodoForm({ categories, tags, setShowForm }: TodoFormProp
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-            style={{ focusRingColor: currentTheme.primary }}
+            className="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 text-white placeholder-white/50"
+            style={inputStyles}
             placeholder="Add details..."
             rows={3}
           />
@@ -140,11 +169,11 @@ export default function TodoForm({ categories, tags, setShowForm }: TodoFormProp
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-                style={{ focusRingColor: currentTheme.primary }}
+                className="flex-1 px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 appearance-none"
+                style={selectStyles}
               >
                 {categories.map((cat) => (
-                  <option key={cat} value={cat}>{cat}</option>
+                  <option key={cat} value={cat} style={optionStyle}>{cat}</option>
                 ))}
               </select>
               <button
@@ -162,8 +191,8 @@ export default function TodoForm({ categories, tags, setShowForm }: TodoFormProp
                   type="text"
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
-                  className="flex-1 px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-                  style={{ focusRingColor: currentTheme.primary }}
+                  className="flex-1 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 text-white placeholder-white/50"
+                  style={inputStyles}
                   placeholder="New category"
                 />
                 <button
@@ -216,8 +245,8 @@ export default function TodoForm({ categories, tags, setShowForm }: TodoFormProp
                   type="text"
                   value={newTag}
                   onChange={(e) => setNewTag(e.target.value)}
-                  className="flex-1 px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-                  style={{ focusRingColor: currentTheme.primary }}
+                  className="flex-1 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 text-white placeholder-white/50"
+                  style={inputStyles}
                   placeholder="New tag"
                 />
                 <button
@@ -239,8 +268,8 @@ export default function TodoForm({ categories, tags, setShowForm }: TodoFormProp
             type="date"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
-            className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-            style={{ focusRingColor: currentTheme.primary }}
+            className="px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 appearance-none"
+            style={inputStyles}
           />
         </div>
         
