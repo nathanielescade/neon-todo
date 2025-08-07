@@ -1,5 +1,6 @@
-// components/dashboard/FilterBar.tsx - Fixed type issues
+// components/dashboard/FilterBar.tsx
 'use client'
+import { useTheme } from '@/context/ThemeContext'
 
 // Define proper types for filters
 interface Filters {
@@ -15,11 +16,38 @@ interface FilterBarProps {
   setFilters: (filters: Filters) => void
   currentTheme: {
     primary: string
+    secondary: string
   }
 }
 
 export default function FilterBar({ categories, filters, setFilters, currentTheme }: FilterBarProps) {
   const priorities = ['low', 'medium', 'high', 'urgent']
+  
+  // Custom select styles
+  const selectStyles = {
+    backgroundColor: 'rgba(30, 41, 59, 0.7)',
+    borderColor: currentTheme.primary,
+    color: 'white',
+    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23${currentTheme.primary.replace('#', '')}' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 1rem center',
+    backgroundSize: '12px',
+    paddingRight: '2.5rem'
+  }
+  
+  const optionStyle = {
+    backgroundColor: 'rgba(30, 41, 59, 0.9)',
+    color: 'white',
+    padding: '0.5rem 1rem'
+  }
+  
+  const inputStyles = {
+    backgroundColor: 'rgba(30, 41, 59, 0.7)',
+    borderColor: currentTheme.primary,
+    color: 'white',
+    // Using CSS custom property for focus ring color
+    '--tw-ring-color': currentTheme.primary,
+  } as React.CSSProperties // Type assertion to allow custom CSS properties
   
   return (
     <div className="mb-8 p-5 rounded-2xl backdrop-blur-lg bg-white/10 border border-white/20">
@@ -30,8 +58,8 @@ export default function FilterBar({ categories, filters, setFilters, currentThem
             type="text"
             value={filters.search}
             onChange={(e) => setFilters({...filters, search: e.target.value})}
-            className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-            style={{ focusRingColor: currentTheme.primary }}
+            className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 text-white placeholder-white/50"
+            style={inputStyles}
             placeholder="Search tasks..."
           />
         </div>
@@ -41,12 +69,12 @@ export default function FilterBar({ categories, filters, setFilters, currentThem
           <select
             value={filters.category}
             onChange={(e) => setFilters({...filters, category: e.target.value})}
-            className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-            style={{ focusRingColor: currentTheme.primary }}
+            className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 appearance-none"
+            style={selectStyles}
           >
-            <option value="">All Categories</option>
+            <option value="" style={optionStyle}>All Categories</option>
             {categories.map((cat) => (
-              <option key={cat} value={cat}>{cat}</option>
+              <option key={cat} value={cat} style={optionStyle}>{cat}</option>
             ))}
           </select>
         </div>
@@ -56,12 +84,12 @@ export default function FilterBar({ categories, filters, setFilters, currentThem
           <select
             value={filters.priority}
             onChange={(e) => setFilters({...filters, priority: e.target.value})}
-            className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-            style={{ focusRingColor: currentTheme.primary }}
+            className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 appearance-none"
+            style={selectStyles}
           >
-            <option value="">All Priorities</option>
+            <option value="" style={optionStyle}>All Priorities</option>
             {priorities.map((p) => (
-              <option key={p} value={p}>{p.charAt(0).toUpperCase() + p.slice(1)}</option>
+              <option key={p} value={p} style={optionStyle}>{p.charAt(0).toUpperCase() + p.slice(1)}</option>
             ))}
           </select>
         </div>
@@ -74,12 +102,12 @@ export default function FilterBar({ categories, filters, setFilters, currentThem
               ...filters, 
               completed: e.target.value === '' ? undefined : e.target.value === 'true'
             })}
-            className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:ring-2"
-            style={{ focusRingColor: currentTheme.primary }}
+            className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 appearance-none"
+            style={selectStyles}
           >
-            <option value="">All Tasks</option>
-            <option value="false">Pending</option>
-            <option value="true">Completed</option>
+            <option value="" style={optionStyle}>All Tasks</option>
+            <option value="false" style={optionStyle}>Pending</option>
+            <option value="true" style={optionStyle}>Completed</option>
           </select>
         </div>
       </div>
