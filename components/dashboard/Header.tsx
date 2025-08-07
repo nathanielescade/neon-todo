@@ -1,8 +1,8 @@
-// components/dashboard/Header.tsx
+// components/dashboard/Header.tsx - Fixed by removing unused import
 'use client'
 import { useState } from 'react'
 import { User } from '@/context/AuthContext'
-import { Theme } from '@/context/ThemeContext'
+// Removed unused import: Theme
 import Image from 'next/image'
 
 // Define the specific theme names type
@@ -11,7 +11,14 @@ type ThemeName = 'neon' | 'sunset' | 'forest' | 'ocean';
 interface HeaderProps {
   user: User | null
   logout: () => void
-  currentTheme: ThemeAuth
+  currentTheme: {
+    primary: string
+    secondary: string
+    accent: string
+    background: string
+    card: string
+    text: string
+  } // Updated to use inline type instead of imported Theme
   theme: ThemeName // Updated to use ThemeName type
   setTheme: (theme: ThemeName) => void // Updated to use ThemeName type
 }
