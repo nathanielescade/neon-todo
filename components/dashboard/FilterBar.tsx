@@ -1,6 +1,5 @@
 // components/dashboard/FilterBar.tsx - Fixed type issues
 'use client'
-import { useTheme } from '@/context/ThemeContext'
 
 // Define proper types for filters
 interface Filters {
