@@ -11,7 +11,7 @@ type ThemeName = 'neon' | 'sunset' | 'forest' | 'ocean';
 interface HeaderProps {
   user: User | null
   logout: () => void
-  currentTheme: Theme
+  currentTheme: ThemeAuth
   theme: ThemeName // Updated to use ThemeName type
   setTheme: (theme: ThemeName) => void // Updated to use ThemeName type
 }

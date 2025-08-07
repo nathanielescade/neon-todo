@@ -1,6 +1,6 @@
-// components/dashboard/FilterBar.tsx
+// components/dashboard/FilterBar.tsx - Fixed by removing unused import
 'use client'
-import { useTheme } from '@/context/ThemeContext'
+// Removed unused import: useTheme
 
 // Define proper types for filters
 interface Filters {

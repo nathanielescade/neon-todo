@@ -1,8 +1,8 @@
-// context/AuthContext.tsx
+// context/AuthContext.tsx - Fixed by exporting User interface
 'use client'
 import { createContext, useContext, useEffect, useState } from 'react'
 
-interface User {
+export interface User {  // Added 'export' keyword
   id: string
   name: string
   email: string
