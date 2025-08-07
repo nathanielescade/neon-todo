@@ -5,12 +5,15 @@ import { User } from '@/context/AuthContext'
 import { Theme } from '@/context/ThemeContext'
 import Image from 'next/image'
 
+// Define the specific theme names type
+type ThemeName = 'neon' | 'sunset' | 'forest' | 'ocean';
+
 interface HeaderProps {
   user: User | null
   logout: () => void
   currentTheme: Theme
-  theme: string
-  setTheme: (theme: string) => void
+  theme: ThemeName // Updated to use ThemeName type
+  setTheme: (theme: ThemeName) => void // Updated to use ThemeName type
 }
 
 export default function Header({ user, logout, currentTheme, theme, setTheme }: HeaderProps) {
@@ -18,10 +21,10 @@ export default function Header({ user, logout, currentTheme, theme, setTheme }: 
   const [imageError, setImageError] = useState(false)
   
   const themes = [
-    { id: 'neon', name: 'Neon Purple', color: '#FF00FF' },
-    { id: 'sunset', name: 'Sunset Orange', color: '#FF4500' },
-    { id: 'forest', name: 'Forest Green', color: '#00FF00' },
-    { id: 'ocean', name: 'Ocean Blue', color: '#1E90FF' },
+    { id: 'neon' as ThemeName, name: 'Neon Purple', color: '#FF00FF' },
+    { id: 'sunset' as ThemeName, name: 'Sunset Orange', color: '#FF4500' },
+    { id: 'forest' as ThemeName, name: 'Forest Green', color: '#00FF00' },
+    { id: 'ocean' as ThemeName, name: 'Ocean Blue', color: '#1E90FF' },
   ]
 
   // Generate initials from user name
