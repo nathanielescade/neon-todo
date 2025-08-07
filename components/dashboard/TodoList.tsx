@@ -1,4 +1,4 @@
-// components/dashboard/TodoList.tsx
+// components/dashboard/TodoList.tsx - Fixed unused variable
 'use client'
 import { useState } from 'react'
 import { Todo } from '@/context/TodoContext'
@@ -11,7 +11,7 @@ interface TodoListProps {
 }
 
 export default function TodoList({ todos }: TodoListProps) {
-  const { deleteTodo, toggleComplete } = useTodo()
+  const { toggleComplete } = useTodo() // Removed unused deleteTodo
   const { currentTheme } = useTheme()
   const [draggedTodo, setDraggedTodo] = useState<Todo | null>(null)
   

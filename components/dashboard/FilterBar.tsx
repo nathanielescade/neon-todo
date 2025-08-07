@@ -1,17 +1,22 @@
-// components/dashboard/FilterBar.tsx
+// components/dashboard/FilterBar.tsx - Fixed type issues
 'use client'
 import { useTheme } from '@/context/ThemeContext'
 
+// Define proper types for filters
+interface Filters {
+  category: string
+  priority: string
+  completed: boolean | undefined
+  search: string
+}
+
 interface FilterBarProps {
   categories: string[]
-  filters: {
-    category: string
-    priority: string
-    completed: boolean | undefined
-    search: string
+  filters: Filters
+  setFilters: (filters: Filters) => void
+  currentTheme: {
+    primary: string
   }
-  setFilters: (filters: any) => void
-  currentTheme: any
 }
 
 export default function FilterBar({ categories, filters, setFilters, currentTheme }: FilterBarProps) {

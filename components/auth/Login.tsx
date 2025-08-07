@@ -1,4 +1,4 @@
-// components/auth/Login.tsx
+// components/auth/Login.tsx - Fixed unused variable
 'use client'
 import { useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
@@ -31,7 +31,8 @@ export default function Login() {
       if (!success) {
         setError('Authentication failed. Please try again.')
       }
-    } catch (err) {
+    } catch {
+      // Fixed: Removed unused 'err' parameter
       setError('An error occurred. Please try again.')
     } finally {
       setLoading(false)

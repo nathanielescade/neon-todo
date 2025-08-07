@@ -1,7 +1,8 @@
-// components/dashboard/Header.tsx
+// components/dashboard/Header.tsx - Fixed img element
 'use client'
 import { User } from '@/context/AuthContext'
 import { Theme } from '@/context/ThemeContext'
+import Image from 'next/image' // Added import
 
 interface HeaderProps {
   user: User | null
@@ -45,9 +46,12 @@ export default function Header({ user, logout, currentTheme, theme, setTheme }: 
           
           <div className="flex items-center space-x-4">
             <div className="relative">
-              <img 
+              {/* Replaced img with Next.js Image component */}
+              <Image 
                 src={user?.avatar || ''} 
                 alt={user?.name || 'User'} 
+                width={48}
+                height={48}
                 className="w-12 h-12 rounded-full border-2"
                 style={{ borderColor: currentTheme.primary }}
               />
