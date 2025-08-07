@@ -35,7 +35,7 @@ A stunningly colorful todo app with powerful features, built with Next.js, TypeS
 ### Installation
 
 1. Clone the repository:
-   ```bash
+  
    git clone https://github.com/nathanielescade/neon-todo.git
    cd neon-todo
 
